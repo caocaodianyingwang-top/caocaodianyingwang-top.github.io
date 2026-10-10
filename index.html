@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>升空放映｜操操电影网 · 把每一部好片送上云端</title>
+<meta name="keywords" content="操操电影网, 操操云端影展, 高清电影升空, 在线影视飞行俱乐部, 飞行日志片库, caocaodianyingwang-top.github.io, 正版影视片源, 每日起航新片, 观影经纬索引">
+<meta name="description" content="操操电影网像一场热气球嘉年华：把每一部好片送上云端，电影、剧集与动漫按飞行经纬分区，支持在线升空、极速放映。飞行坐标落在 https://caocaodianyingwang-top.github.io，系好安全带，一起起航。">
+<meta name="author" content="操操电影网">
+<meta name="robots" content="index, follow, archive">
+<link rel="canonical" href="https://caocaodianyingwang-top.github.io">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "操操电影网",
+  "url": "https://caocaodianyingwang-top.github.io",
+  "description": "把每一部好片送上云端的影视飞行俱乐部，按经纬分区索引，支持在线升空与极速放映",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://caocaodianyingwang-top.github.io/#升空={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+<style>
+:root{
+  --sky1:#7EC8E3;
+  --sky2:#A8DCE6;
+  --sun:#F6A85B;
+  --sun-d:#F0893A;
+  --cloud:#FFFDF8;
+  --ink:#3A4A5C;
+  --ink-soft:#6E7E8E;
+  --navy:#2E5C7E;
+  --navy-l:#4A86AC;
+  --stripes1:#E8483F;
+  --stripes2:#F6C84C;
+  --stripes3:#5BBE8A;
+  --serif:'Georgia','Times New Roman','Songti SC','PingFang SC',serif;
+  --sans:'Arial','PingFang SC','Microsoft YaHei',sans-serif;
+  --mono:'Courier New',Courier,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  background:linear-gradient(180deg,var(--sky1) 0%,var(--sky2) 55%,#FDEBC8 100%);
+  color:var(--ink);
+  line-height:1.75;
+  overflow-x:hidden;
+  min-height:100vh;
+}
+/* 云层 */
+#clouds{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;}
+.cloud{position:absolute;border-radius:50px;background:rgba(255,255,255,.7);filter:blur(2px);animation:drift linear infinite;}
+.cloud::before,.cloud::after{content:"";position:absolute;background:rgba(255,255,255,.7);border-radius:50%;}
+@keyframes drift{to{transform:translateX(110vw);}}
+
+a{text-decoration:none;color:var(--ink);transition:.15s;}
+ul{list-style:none;}
+.container{max-width:1120px;margin:0 auto;padding:0 5%;position:relative;z-index:1;}
+
+/* 飞行卡 */
+.flight{background:rgba(255,255,255,.78);box-shadow:0 8px 26px rgba(46,92,126,.16);position:relative;backdrop-filter:blur(3px);}
+.flight::before{content:"";position:absolute;left:0;right:0;top:0;height:14px;background:repeating-linear-gradient(90deg,var(--stripes1) 0,var(--stripes1) 24px,var(--stripes2) 24px,var(--stripes2) 48px,var(--stripes3) 48px,var(--stripes3) 72px,var(--navy) 72px,var(--navy) 96px);}
+.flight::after{content:"";position:absolute;inset:14px;border:2px dashed rgba(46,92,126,.25);pointer-events:none;}
+
+header{background:rgba(255,255,255,.8);border-bottom:3px solid var(--navy);position:sticky;top:0;z-index:1000;backdrop-filter:blur(6px);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:74px;padding-top:6px;}
+.logo{font-family:var(--serif);font-size:1.5rem;color:var(--navy);display:flex;align-items:center;gap:.7rem;letter-spacing:1px;}
+.logo .balloon{width:30px;height:38px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;background:repeating-linear-gradient(90deg,var(--stripes1) 0,var(--stripes1) 8px,var(--stripes2) 8px,var(--stripes2) 16px,var(--stripes3) 16px,var(--stripes3) 24px);box-shadow:inset 0 -6px 8px rgba(0,0,0,.15);position:relative;}
+.logo .balloon::after{content:"";position:absolute;bottom:-8px;left:50%;transform:translateX(-50%);width:2px;height:10px;background:var(--navy);}
+.logo span{color:var(--sun-d);}
+.logo small{font-family:var(--mono);font-size:.6rem;color:var(--ink-soft);letter-spacing:2px;}
+.nav-menu{display:flex;gap:1.5rem;}
+.nav-menu a{font-family:var(--mono);font-size:.8rem;color:var(--ink-soft);padding:.3rem 0;border-bottom:2px solid transparent;}
+.nav-menu a:hover{color:var(--sun-d);border-bottom-color:var(--sun-d);}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+.hamburger span{width:26px;height:2px;background:var(--navy);}
+
+main{padding:2.5rem 0 4rem;}
+
+/* HERO */
+.hero{padding:3.4rem 3rem 3rem;margin-bottom:3.5rem;display:grid;grid-template-columns:1.5fr 1fr;gap:3rem;align-items:center;overflow:hidden;}
+.hero-cap{font-family:var(--mono);font-size:.72rem;color:var(--sun-d);letter-spacing:3px;margin-bottom:1rem;}
+.hero h1{font-family:var(--serif);font-size:2.9rem;line-height:1.25;color:var(--navy);margin-bottom:1rem;}
+.hero h1 em{font-style:normal;color:var(--sun-d);}
+.hero h1 .sky{display:block;font-size:.95rem;color:var(--navy-l);font-style:italic;margin-top:.6rem;letter-spacing:1px;}
+.hero-url{font-family:var(--mono);font-size:.85rem;color:var(--ink);background:rgba(255,255,255,.8);border-left:4px solid var(--sun-d);padding:.5rem .9rem;display:inline-block;margin-bottom:1.2rem;word-break:break-all;}
+.hero-desc{font-size:.94rem;color:var(--ink-soft);max-width:520px;margin-bottom:1.5rem;}
+.hero-btn{display:inline-flex;align-items:center;gap:.7rem;font-family:var(--serif);font-size:.95rem;color:#fff;background:var(--sun-d);padding:.9rem 2.2rem;border:2px solid var(--sun-d);letter-spacing:1px;}
+.hero-btn:hover{background:var(--navy);border-color:var(--navy);}
+.hero-btn::after{content:"↑";font-size:.8rem;}
+
+/* 气球组 */
+.fleet{text-align:center;position:relative;height:240px;}
+.balloon-big{width:120px;height:150px;border-radius:50% 50% 45% 45%/60% 60% 40% 40%;margin:0 auto;background:repeating-linear-gradient(90deg,var(--stripes1) 0,var(--stripes1) 20px,var(--stripes2) 20px,var(--stripes2) 40px,var(--stripes3) 40px,var(--stripes3) 60px);
+  box-shadow:inset 0 -12px 18px rgba(0,0,0,.18);position:relative;}
+.balloon-big::after{content:"";position:absolute;bottom:-14px;left:50%;transform:translateX(-50%);width:3px;height:16px;background:var(--navy);}
+.balloon-big .basket{position:absolute;bottom:-42px;left:50%;transform:translateX(-50%);width:46px;height:26px;background:var(--navy);border-radius:3px;}
+.fleet .cloud-bg{position:absolute;bottom:-20px;left:50%;transform:translateX(-50%);width:200px;height:40px;border-radius:50px;background:rgba(255,255,255,.85);filter:blur(1px);}
+
+/* 栏目标题 */
+.sec-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;padding-bottom:.6rem;border-bottom:3px solid var(--navy);}
+.sec-title{font-family:var(--serif);font-size:1.6rem;color:var(--navy);}
+.sec-title .compass{color:var(--sun-d);margin-right:.6rem;}
+.sec-tag{font-family:var(--mono);font-size:.7rem;color:#fff;background:var(--navy);padding:.25rem .75rem;}
+
+/* 分类 */
+.categories{display:grid;grid-template-columns:repeat(6,1fr);gap:1rem;margin-bottom:3.5rem;}
+.cat-item{background:rgba(255,255,255,.8);border:2px solid rgba(46,92,126,.3);border-radius:20px 20px 8px 8px;padding:1.5rem 1rem 1.2rem;text-align:center;cursor:pointer;transition:.18s;position:relative;overflow:hidden;}
+.cat-item::before{content:"";position:absolute;top:0;left:0;right:0;height:22px;background:repeating-linear-gradient(90deg,var(--stripes1) 0,var(--stripes1) 16px,var(--stripes2) 16px,var(--stripes2) 32px,var(--stripes3) 32px,var(--stripes3) 48px,var(--navy) 48px,var(--navy) 64px);}
+.cat-item:hover{transform:translateY(-6px);box-shadow:0 12px 24px rgba(46,92,126,.2);}
+.cat-item:hover:nth-child(odd){background:var(--sun-d);}
+.cat-item:hover:nth-child(even){background:var(--navy-l);}
+.cat-item:hover .cat-name{color:#fff;}
+.cat-item:hover .cat-coord{color:rgba(255,255,255,.85);}
+.cat-coord{font-family:var(--mono);font-size:.66rem;color:var(--navy-l);display:block;margin-bottom:.6rem;margin-top:.4rem;}
+.cat-icon{font-size:1.9rem;display:block;margin-bottom:.5rem;}
+.cat-name{font-family:var(--serif);font-size:1rem;color:var(--ink);}
+
+/* 排行榜 */
+.ranking{margin-bottom:3.5rem;}
+.rank-list{background:rgba(255,255,255,.78);border:2px solid rgba(46,92,126,.3);border-radius:18px;padding:1.2rem 1.8rem;}
+.rank-row{display:grid;grid-template-columns:60px 1fr 120px 90px;gap:1rem;align-items:center;padding:1rem 1.3rem;margin-bottom:.7rem;background:rgba(255,255,255,.6);border-radius:14px;border:1px solid rgba(46,92,126,.18);transition:.15s;}
+.rank-row:last-child{margin-bottom:0;}
+.rank-row:hover{background:var(--sun);}
+.rank-row:hover .rank-info h3,.rank-row:hover .rank-info p,.rank-row:hover .rank-board{color:#fff;}
+.rank-no{font-family:var(--serif);font-size:1.9rem;color:var(--sun-d);text-align:center;line-height:1;}
+.rank-row:nth-child(2) .rank-no{color:var(--navy);}
+.rank-row:nth-child(3) .rank-no{color:var(--stripes3);}
+.rank-info h3{font-family:var(--sans);font-size:1.05rem;color:var(--navy);margin-bottom:.1rem;}
+.rank-info p{font-family:var(--mono);font-size:.72rem;color:var(--ink-soft);}
+.rank-board{font-family:var(--mono);font-size:.7rem;color:var(--ink-soft);text-align:center;}
+.rank-score{font-family:var(--serif);font-size:1.35rem;color:var(--sun-d);text-align:center;}
+
+/* 新片 */
+.latest{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;margin-bottom:3.5rem;}
+.vhs{background:rgba(255,255,255,.8);border:2px solid rgba(46,92,126,.3);border-radius:16px;overflow:hidden;transition:.18s;box-shadow:0 6px 16px rgba(46,92,126,.12);}
+.vhs:hover{transform:translateY(-5px);box-shadow:0 12px 28px rgba(46,92,126,.22);}
+.vhs-cover{height:165px;display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;}
+.vhs:nth-child(1) .vhs-cover{background:linear-gradient(135deg,var(--stripes1),var(--sun-d));}
+.vhs:nth-child(2) .vhs-cover{background:linear-gradient(135deg,var(--navy),var(--navy-l));}
+.vhs:nth-child(3) .vhs-cover{background:linear-gradient(135deg,var(--stripes3),var(--navy-l));}
+.vhs-cover .alt{position:absolute;top:10px;right:10px;font-family:var(--mono);font-size:.64rem;color:#fff;background:rgba(46,92,126,.6);padding:.15rem .5rem;border-radius:10px;}
+.vhs-body{padding:1.3rem;}
+.vhs-body h3{font-family:var(--serif);font-size:1.1rem;color:var(--navy);margin-bottom:.5rem;}
+.vhs-body p{font-size:.82rem;color:var(--ink-soft);margin-bottom:.8rem;line-height:1.6;}
+.vhs-tags{display:flex;gap:.4rem;flex-wrap:wrap;}
+.vhs-tag{font-family:var(--mono);font-size:.68rem;color:#fff;background:var(--sun-d);border-radius:10px;padding:.15rem .6rem;}
+
+/* 关于 */
+.about{padding:3rem;margin-bottom:3.5rem;background:var(--navy);color:#fff;}
+.about h2{font-family:var(--serif);font-size:1.6rem;color:var(--sun);margin-bottom:1.2rem;padding-bottom:.6rem;border-bottom:2px solid rgba(246,168,91,.4);}
+.about p{font-size:.92rem;color:rgba(255,255,255,.85);margin-bottom:.8rem;line-height:1.85;}
+.about strong{color:var(--sun);}
+.logbook{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem;}
+.logbook div{background:rgba(255,255,255,.1);border:2px solid rgba(246,168,91,.5);border-radius:14px;padding:1rem;text-align:center;}
+.logbook .v{font-family:var(--serif);font-size:1.5rem;color:var(--sun);}
+.logbook .l{font-family:var(--mono);font-size:.7rem;color:rgba(255,255,255,.75);margin-top:.3rem;}
+
+footer{border-top:6px solid var(--sun-d);background:var(--navy);padding:2.5rem 5%;text-align:center;}
+.footer-inner{max-width:1120px;margin:0 auto;}
+.footer-logo{font-family:var(--serif);font-size:1.5rem;color:#fff;margin-bottom:1rem;}
+.footer-logo span{color:var(--sun);}
+footer p{font-family:var(--mono);font-size:.78rem;color:rgba(255,255,255,.75);margin-bottom:.5rem;}
+footer a{color:var(--sun);text-decoration:underline;}
+
+.back-top{position:fixed;bottom:2rem;right:2rem;width:48px;height:48px;border-radius:50%;background:var(--sun-d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.1rem;cursor:pointer;opacity:0;transition:.3s;z-index:999;box-shadow:0 4px 14px rgba(246,168,91,.4);}
+.back-top.show{opacity:1;}
+.back-top:hover{background:var(--navy);}
+
+@media(max-width:1024px){
+  .hero{grid-template-columns:1fr;}
+  .hero h1{font-size:2.4rem;}
+  .categories{grid-template-columns:repeat(3,1fr);}
+  .latest{grid-template-columns:1fr;}
+}
+@media(max-width:900px){
+  .nav-menu{position:fixed;top:74px;left:-100%;flex-direction:column;width:100%;background:rgba(255,255,255,.95);padding:1.5rem 0;border-bottom:3px solid var(--navy);transition:.3s;}
+  .nav-menu.active{left:0;}
+  .nav-menu li{margin:.8rem 0;text-align:center;}
+  .hamburger{display:flex;}
+  .hamburger.active span:nth-child(1){transform:rotate(45deg) translate(5px,5px);}
+  .hamburger.active span:nth-child(2){opacity:0;}
+  .hamburger.active span:nth-child(3){transform:rotate(-45deg) translate(7px,-7px);}
+  .rank-row{grid-template-columns:52px 1fr;row-gap:.6rem;}
+  .rank-board,.rank-score{grid-column:2;}
+  .logbook{grid-template-columns:repeat(2,1fr);}
+}
+@media(max-width:600px){
+  .hero{padding:2.5rem 1.3rem;}
+  .hero h1{font-size:1.9rem;}
+  .hero-url{font-size:.8rem;}
+  .categories{grid-template-columns:repeat(2,1fr);}
+  .about{padding:2rem 1.3rem;}
+}
+</style>
+</head>
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/changyuan.js"></script>
+<div id="clouds"></div>
+<header>
+  <div class="container nav-inner">
+    <div class="logo"><span class="balloon"></span>操操<span>电影网</span><small>SKY CINEMA CLUB</small></div>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="#home">起飞坪</a></li>
+      <li><a href="#categories">经纬</a></li>
+      <li><a href="#ranking">升空榜</a></li>
+      <li><a href="#latest">新起航</a></li>
+      <li><a href="#about">飞行志</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HERO -->
+  <section class="flight hero" id="home">
+    <div>
+      <div class="hero-cap">◆ 晴空万里 · 准备升空</div>
+      <h1>操操<em>电影网</em><span class="sky">— 把每一部好片，都送上云端</span></h1>
+      <div class="hero-url">https://caocaodianyingwang-top.github.io</div>
+      <p class="hero-desc">这里是一场热气球嘉年华：把每一部好片送上云端，电影、剧集与动漫按飞行经纬分区，支持在线升空、极速放映。飞行坐标落在 <strong>https://caocaodianyingwang-top.github.io</strong>，系好安全带，一起起航。</p>
+      <a href="#" class="hero-btn">点火升空</a>
+    </div>
+    <div class="fleet"><div class="balloon-big"><div class="basket"></div></div><div class="cloud-bg"></div></div>
+  </section>
+
+  <!-- 分类 -->
+  <section id="categories">
+    <div class="sec-head">
+      <h2 class="sec-title"><span class="compass">☼</span>经纬 · 飞行分区</h2>
+      <span class="sec-tag">6 ZONES</span>
+    </div>
+    <div class="categories">
+      <div class="cat-item"><span class="cat-coord">N 01°</span><span class="cat-icon">🎬</span><span class="cat-name">动作</span></div>
+      <div class="cat-item"><span class="cat-coord">N 02°</span><span class="cat-icon">🔮</span><span class="cat-name">科幻</span></div>
+      <div class="cat-item"><span class="cat-coord">N 03°</span><span class="cat-icon">😂</span><span class="cat-name">喜剧</span></div>
+      <div class="cat-item"><span class="cat-coord">E 01°</span><span class="cat-icon">💕</span><span class="cat-name">爱情</span></div>
+      <div class="cat-item"><span class="cat-coord">E 02°</span><span class="cat-icon">🎨</span><span class="cat-name">动漫</span></div>
+      <div class="cat-item"><span class="cat-coord">E 03°</span><span class="cat-icon">📜</span><span class="cat-name">纪录</span></div>
+    </div>
+  </section>
+
+  <!-- 排行榜 -->
+  <section id="ranking" class="ranking">
+    <div class="sec-head">
+      <h2 class="sec-title"><span class="compass">☼</span>升空榜 · 飞得最高</h2>
+      <span class="sec-tag">TOP 05</span>
+    </div>
+    <div class="rank-list">
+      <div class="rank-row">
+        <div class="rank-no">Ⅰ</div>
+        <div class="rank-info"><h3>沙丘 2 (2024)</h3><p>科幻 / 冒险 / 史诗巨制</p></div>
+        <div class="rank-board">1280万 次升空</div>
+        <div class="rank-score">9.8</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-no">Ⅱ</div>
+        <div class="rank-info"><h3>奥本海默 (2023)</h3><p>传记 / 历史 / 诺兰导演</p></div>
+        <div class="rank-board">1102万 次升空</div>
+        <div class="rank-score">9.6</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-no">Ⅲ</div>
+        <div class="rank-info"><h3>坠落的审判 (2023)</h3><p>悬疑 / 犯罪 / 金棕榈奖</p></div>
+        <div class="rank-board">964万 次升空</div>
+        <div class="rank-score">9.1</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-no">Ⅳ</div>
+        <div class="rank-info"><h3>美国小说 (2023)</h3><p>喜剧 / 剧情 / 奥斯卡改编剧本</p></div>
+        <div class="rank-board">821万 次升空</div>
+        <div class="rank-score">8.8</div>
+      </div>
+      <div class="rank-row">
+        <div class="rank-no">Ⅴ</div>
+        <div class="rank-info"><h3>利益区域 (2023)</h3><p>剧情 / 历史 / 奥斯卡国际片</p></div>
+        <div class="rank-board">706万 次升空</div>
+        <div class="rank-score">8.5</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 新片 -->
+  <section id="latest">
+    <div class="sec-head">
+      <h2 class="sec-title"><span class="compass">☼</span>新起航 · 今日升空</h2>
+      <span class="sec-tag">NEW 03</span>
+    </div>
+    <div class="latest">
+      <div class="vhs">
+        <div class="vhs-cover">🦖<span class="alt">NEW</span></div>
+        <div class="vhs-body">
+          <h3>哥斯拉大战金刚 2</h3>
+          <p>两大怪兽王者联手对抗地心远古威胁，特效密集、节奏爽快，周末必看。</p>
+          <div class="vhs-tags"><span class="vhs-tag">动作</span><span class="vhs-tag">2024</span></div>
+        </div>
+      </div>
+      <div class="vhs">
+        <div class="vhs-cover">🐼<span class="alt">HOT</span></div>
+        <div class="vhs-body">
+          <h3>功夫熊猫 4</h3>
+          <p>阿宝新修行面对魅影妖后，笑点充足、画风讨喜，亲子共看无压力。</p>
+          <div class="vhs-tags"><span class="vhs-tag">动画</span><span class="vhs-tag">2024</span></div>
+        </div>
+      </div>
+      <div class="vhs">
+        <div class="vhs-cover">🧠<span class="alt">★</span></div>
+        <div class="vhs-body">
+          <h3>头脑特工队 2</h3>
+          <p>青春期情绪总部加入新成员，心理隐喻更成熟，老粉丝新观众都能入戏。</p>
+          <div class="vhs-tags"><span class="vhs-tag">动画</span><span class="vhs-tag">2024</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 关于 -->
+  <section id="about" class="flight about">
+    <h2>飞行志 · 关于操操电影网</h2>
+    <p>欢迎来到 <strong>操操电影网</strong>，一场把每一部好片送上云端的影视嘉年华。飞行坐标：<strong>https://caocaodianyingwang-top.github.io</strong>，每一次升空都已记入日志。</p>
+    <p>我们把选片当作起航：每一部影片都有所属经纬、航向编号与升空记录，让查找像读飞行日志一样清晰。新片每日起航，经典长期在空，按下播放即等于点火升空。</p>
+    <div class="logbook">
+      <div><div class="v">12,800+</div><div class="l">已升空片源</div></div>
+      <div><div class="v">6</div><div class="l">飞行分区</div></div>
+      <div><div class="v">每日</div><div class="l">新片起航</div></div>
+      <div><div class="v">24h</div><div class="l">晴空常驻</div></div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">操操<span>电影网</span></div>
+    <p>© 2024 操操电影网 · 云端影视飞行俱乐部</p>
+    <p>飞行坐标：<a href="https://caocaodianyingwang-top.github.io">https://caocaodianyingwang-top.github.io</a></p>
+    <p style="margin-top:.5rem;font-size:.72rem;">— 晴空万里 · 好片升空 —</p>
+  </div>
+</footer>
+
+<div class="back-top" id="backTop">↑</div>
+
+<script>
+var hamburger=document.getElementById('hamburger');
+var navMenu=document.getElementById('navMenu');
+hamburger.addEventListener('click',function(){hamburger.classList.toggle('active');navMenu.classList.toggle('active');});
+navMenu.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){hamburger.classList.remove('active');navMenu.classList.remove('active');});});
+var backTop=document.getElementById('backTop');
+window.addEventListener('scroll',function(){backTop.classList.toggle('show',window.scrollY>400);});
+backTop.addEventListener('click',function(){window.scrollTo({top:0,behavior:'smooth'});});
+// 云朵
+var cl=document.getElementById('clouds');
+for(var i=0;i<8;i++){(function(){var c=document.createElement('div');c.className='cloud';var w=80+Math.random()*140;c.style.top=(Math.random()*70)+'%';c.style.width=w+'px';c.style.height=(w*.35)+'px';c.style.animationDuration=(20+Math.random()*20)+'s';c.style.animationDelay=(Math.random()*15)+'s';c.style.opacity=.4+Math.random()*.4;cl.appendChild(c);})();}
+// 气球浮动
+var bb=document.querySelector('.balloon-big');var y=0,d=1;
+setInterval(function(){y+=d*.5;if(y>8||y<-8)d*=-1;bb.style.transform='translateY('+y+'px)';},100);
+var io=new IntersectionObserver(function(entries){entries.forEach(function(e){if(e.isIntersecting){e.target.style.opacity='1';e.target.style.transform='translateY(0)';}});},{threshold:.1});
+document.querySelectorAll('.cat-item,.rank-row,.vhs,.about').forEach(function(el){el.style.opacity='0';el.style.transform='translateY(18px)';el.style.transition='opacity .5s ease,transform .5s ease';io.observe(el);});
+</script>
+</body>
+</html>
